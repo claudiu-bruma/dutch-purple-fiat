@@ -1,0 +1,107 @@
+---
+swagger: "2.0"
+info:
+  description: "No description"
+  version: "1.0.0"
+  title: "DutchPurpleFiat"
+  contact: {}
+host: "dutch.purple.fiat"
+basePath: "/account"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /account:
+    post:
+      summary: "open account"
+      description: "open account  - The API will expose an endpoint which accepts\
+        \ the user information (customerID, initialCredit)  for already existing customer"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "CustomerId"
+          - "InitialCredit"
+          properties:
+            CustomerId:
+              type: "string"
+              description: "Customer id identifying already existing user"
+            InitialCredit:
+              type: "number"
+              description: "Initial credit on opening new account"
+      responses:
+        200:
+          description: "account created succesfully"
+          schema:
+            type: "string"
+            description: "returns unique identifier for newly created account "
+          examples:
+            application/json: "whatever-string-is-unique-for-account"
+        400:
+          description: "well.... bad request is quite appropriately descriptive here"
+        404:
+          description: "Customer not found"
+        500:
+          description: "Something went wrong. Time to get to know your system admin\
+            \ and fellow developer"
+  /customer:
+    get:
+      summary: "Get customer information"
+      description: "Get customer information "
+      parameters:
+      - name: "customerId"
+        in: "query"
+        required: true
+        type: "string"
+        description: "unique identifier for customer id"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "object"
+            properties:
+              Firstname:
+                type: "string"
+                description: "Cusomer's first name"
+              Surname:
+                type: "string"
+                description: "Customer's last name"
+              Balance:
+                type: "number"
+                description: "Current Balance on customer's accounts"
+              Transactions:
+                type: "array"
+                description: "List of all transaction for customer's accounts"
+                items:
+                  type: "object"
+                  properties:
+                    AccountId:
+                      type: "string"
+                      description: "Account id for transaction"
+                    TransactionType:
+                      type: "string"
+                      description: "Type of transaction?....YAGNI?"
+                    Value:
+                      type: "number"
+                      description: "Transacted Value"
+                    Date:
+                      type: "string"
+                      format: "date-time"
+                      description: "Transaction Date"
+                    Reference:
+                      type: "string"
+                      description: "Unique Transaction Reference"
+        400:
+          description: "Bad request... probably forgot customer id , didn't you ?"
+        404:
+          description: "Customer Not Found"
+        500:
+          description: "Something went wrong... time to get to know your system admin\
+            \ and fellow developer"
