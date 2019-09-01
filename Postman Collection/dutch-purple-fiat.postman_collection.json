@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\",\n\t\"InitialCredit\": 0\n}"
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\",\n\t\"InitialCredit\": 101\n}"
 				},
 				"description": "add account with non 0 balance"
 			},
