@@ -1,20 +1,46 @@
-﻿using DutchPurpleFiat.Data.Repositories.CustomerRepository;
+﻿using DutchPurpleFiat.Data.Constants;
+using DutchPurpleFiat.Data.Repositories.CustomerRepository;
+using DutchPurpleFiat.Data.Repositories.TransactionRepository;
+using DutchPurpleFiat.Services.TransactionServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DutchPurpleFiat.Services.CustomerServices
 {
     public class CustomerService : ICustomerService
     {
-        public ICustomerRepository CustomerRepository { get; set; }
-        public CustomerService(ICustomerRepository CustomerRepository)
+        private readonly ICustomerRepository customerRepository;
+        private readonly ITransactionService transactionServices;
+        public CustomerService(ICustomerRepository customerRepository, ITransactionService transactionServices)
         {
-            this.CustomerRepository = CustomerRepository;
+            this.customerRepository =customerRepository;
+            this.transactionServices = transactionServices;
         }
         public bool CusomerExists(string customerId)
         {
-            return CustomerRepository.GetCustomerByUId(customerId) != null;
+            return customerRepository.CustomerExists(customerId);
         }
+        public CustomerDto GetCustomer(string customerId)
+        {
+            if ( string.IsNullOrWhiteSpace(customerId) )
+            {
+                throw new ArgumentException(DataValidationConstants.invalidCustomerIdMessage);
+            }
+
+            var customerEntity = customerRepository.GetCustomerByUId(customerId);
+            var customerTransactions = transactionServices.GetTransactionsForCustomerId(customerId);
+            return new CustomerDto()
+            {
+                FirstName = customerEntity.FirstName,
+                LastName = customerEntity.LastName,
+                Balance = customerTransactions.Sum(x => x.Amount),
+                Transactions =  customerTransactions
+                
+            };
+        }
+
+        
     }
 }

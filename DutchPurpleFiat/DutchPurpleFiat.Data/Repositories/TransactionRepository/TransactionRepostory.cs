@@ -20,13 +20,14 @@ namespace DutchPurpleFiat.Data.Repositories.TransactionRepository
 
             if (!DataStore.TransactionStore.Any(x => x.CusomerId == customerID))
             {
-                return null;
+                return new List<TransactionEntity>();
             }
 
             return DataStore.TransactionStore.Where(x => x.CusomerId == customerID);
         }
         public void AddTransaction(TransactionEntity newEntity)
         {
+
             DataStore.TransactionStore.Add(newEntity);
         }
     }

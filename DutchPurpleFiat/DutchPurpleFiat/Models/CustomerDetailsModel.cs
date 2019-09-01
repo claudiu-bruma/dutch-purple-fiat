@@ -25,7 +25,7 @@ namespace DutchPurpleFiat.Models
         /// </summary>
         /// <value>Current Balance on customer's accounts</value>
         
-        public decimal? Balance { get; set; }
+        public float? Balance { get; set; }
 
         /// <summary>
         /// List of all transaction for customer's accounts

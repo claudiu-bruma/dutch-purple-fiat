@@ -7,6 +7,7 @@ namespace DutchPurpleFiat.Services.CustomerServices
     public interface ICustomerService 
     {
         bool CusomerExists(string customerId);
+        CustomerDto GetCustomer(string customerId);
 
     }
 }

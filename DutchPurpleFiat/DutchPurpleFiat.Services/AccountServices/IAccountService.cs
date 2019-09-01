@@ -7,6 +7,7 @@ namespace DutchPurpleFiat.Services.AccountServices
 {
     public interface IAccountService
     {
-        Task<string> OpenAccount(string cusomerId, float initialCredit);
+        string OpenAccount(string customerId);
+        string GetCustomerIdOnAccount(string accountId);
     }
 }

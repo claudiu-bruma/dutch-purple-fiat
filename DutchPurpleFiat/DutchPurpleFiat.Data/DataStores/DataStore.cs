@@ -19,9 +19,9 @@ namespace DutchPurpleFiat.Data.DataStores
         }
         private void AddDemoCustomerData()
         {
-            CustomerStore.Add(new CustomerEntity() { CustomerUID = "CUID1-JW", FirstName = "John", LastName = "Wick" });
-            CustomerStore.Add(new CustomerEntity() { CustomerUID = "CUID2-MS", FirstName = "Michael", LastName = "Stonebridge" });
-            CustomerStore.Add(new CustomerEntity() { CustomerUID = "CUID3-MW", FirstName = "Michael", LastName = "Weston" });
+            CustomerStore.Add(new CustomerEntity() { CustomerUId = "CUID1-JW", FirstName = "John", LastName = "Wick" });
+            CustomerStore.Add(new CustomerEntity() { CustomerUId = "CUID2-MS", FirstName = "Michael", LastName = "Stonebridge" });
+            CustomerStore.Add(new CustomerEntity() { CustomerUId = "CUID3-MW", FirstName = "Michael", LastName = "Weston" });
         }
     }
  

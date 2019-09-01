@@ -7,6 +7,7 @@ namespace DutchPurpleFiat.Services.TransactionServices
     public interface ITransactionService
     {
         void RegisterTransaction(TransactionDto transaction);
+        IEnumerable<TransactionDto> GetTransactionsForCustomerId(string customerId);
 
     }
 }

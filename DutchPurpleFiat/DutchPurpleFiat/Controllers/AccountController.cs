@@ -39,7 +39,7 @@ namespace DutchPurpleFiat.Controllers
         /// <response code="404">Customer not found</response>
         /// <response code="500">Something went wrong. Time to get to know your system admin and fellow developer</response>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]AccountModel newAccount)
+        public IActionResult Post([FromBody]AccountModel newAccount)
         {
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(string));
@@ -55,7 +55,7 @@ namespace DutchPurpleFiat.Controllers
             var accountId = string.Empty;
             try
             {
-                accountId = await accountService.OpenAccount(newAccount.CustomerId, newAccount.InitialCredit);
+                accountId = accountService.OpenAccount(newAccount.CustomerId);
             }
             catch (ArgumentException aex)
             {
@@ -69,9 +69,14 @@ namespace DutchPurpleFiat.Controllers
             }
 
 
-            if (newAccount.InitialCredit >0 )
+            if (newAccount.InitialCredit > 0)
             {
-                transactionService.RegisterTransaction(new TransactionDto() { })
+                transactionService.RegisterTransaction(new TransactionDto() {
+                    AccountId = accountId,
+                    CustomerId = newAccount.CustomerId,
+                    TransactionDate = DateTime.Now,
+                    Amount = newAccount.InitialCredit
+                });
             }
 
             return new OkObjectResult(accountId);

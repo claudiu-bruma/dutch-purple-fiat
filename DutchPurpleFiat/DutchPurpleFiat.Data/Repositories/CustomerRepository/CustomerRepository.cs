@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using DutchPurpleFiat.Data.DataStores;
 using System.Linq;
+using DutchPurpleFiat.Data.Constants;
 
 namespace DutchPurpleFiat.Data.Repositories.CustomerRepository
 {
@@ -14,15 +15,19 @@ namespace DutchPurpleFiat.Data.Repositories.CustomerRepository
         {
             this.DataStore = dataStore;
         }
-        public CustomerEntity GetCustomerByUId(string customerID)
+        public bool CustomerExists(string customerId)
+        {
+            return DataStore.CustomerStore.Any(x => x.CustomerUId == customerId);
+        }
+        public CustomerEntity GetCustomerByUId(string customerId)
         {
 
-            if (!DataStore.CustomerStore.Any(x=>x.CustomerUID  == customerID))
+            if (!DataStore.CustomerStore.Any(x=>x.CustomerUId  == customerId))
             {
-                return null;
+                throw new ArgumentNullException(DataValidationConstants.invalidCustomerIdMessage);
             }
 
-            return DataStore.CustomerStore.FirstOrDefault(x => x.CustomerUID == customerID);
+            return DataStore.CustomerStore.FirstOrDefault(x => x.CustomerUId == customerId);
         }
     }
 }

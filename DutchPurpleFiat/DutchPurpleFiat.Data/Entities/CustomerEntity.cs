@@ -8,7 +8,7 @@ namespace DutchPurpleFiat.Data.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }        
-        public string CustomerUID { get; set; }
+        public string CustomerUId { get; set; }
 
     }
 }
