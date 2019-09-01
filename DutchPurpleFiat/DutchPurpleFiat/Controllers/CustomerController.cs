@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DutchPurpleFiat.Models;
+using DutchPurpleFiat.Services.CustomerServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,12 @@ namespace DutchPurpleFiat.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private readonly ICustomerService customerService;
+        public CustomerController(ICustomerService customerService)
+        {
+            this.customerService = customerService;
+        }
+
         /// <summary>
         /// Get customer information
         /// </summary>
@@ -22,21 +30,38 @@ namespace DutchPurpleFiat.Controllers
         /// <response code="404">Customer Not Found</response>
         /// <response code="500">Something went wrong... time to get to know your system admin and fellow developer</response>
         [HttpGet]
-        public async  Task<IActionResult> Get(  string customerId)
+        public IActionResult Get(string customerId)
         {
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(InlineResponse200));
+ 
+            if (string.IsNullOrWhiteSpace(customerId))
+            {
+                return new BadRequestResult();
+            }
+            try
+            {
+                var customerDto =  customerService.GetCustomer(customerId);
 
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
+                return new OkObjectResult(customerDto);
+            }
+            catch (ArgumentNullException anex)
+            {
+                Trace.TraceError(anex.ToString());
+                return new NotFoundObjectResult(anex.Message);
+            }
+            catch (ArgumentException aex)
+            {
+                Trace.TraceError(aex.ToString());
+                return new NotFoundObjectResult (aex.Message);
+            }
 
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404);
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
 
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500);
 
-            return new OkObjectResult(new CustomerDetailsModel());
+
         }
     }
 }
