@@ -20,6 +20,10 @@ namespace DutchPurpleFiat.Services.CustomerServices
         }
         public bool CusomerExists(string customerId)
         {
+            if (string.IsNullOrWhiteSpace(customerId))
+            {
+                throw new ArgumentException(DataValidationConstants.invalidCustomerIdMessage);
+            }
             return customerRepository.CustomerExists(customerId);
         }
         public CustomerDto GetCustomer(string customerId)

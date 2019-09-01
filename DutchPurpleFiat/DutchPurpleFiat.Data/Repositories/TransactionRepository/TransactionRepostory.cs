@@ -18,12 +18,12 @@ namespace DutchPurpleFiat.Data.Repositories.TransactionRepository
         public IEnumerable<TransactionEntity> GetCusomerTransactions(string customerID)
         {
 
-            if (!DataStore.TransactionStore.Any(x => x.CusomerId == customerID))
+            if (!DataStore.TransactionStore.Any(x => x.CustomerId == customerID))
             {
                 return new List<TransactionEntity>();
             }
 
-            return DataStore.TransactionStore.Where(x => x.CusomerId == customerID);
+            return DataStore.TransactionStore.Where(x => x.CustomerId == customerID);
         }
         public void AddTransaction(TransactionEntity newEntity)
         {

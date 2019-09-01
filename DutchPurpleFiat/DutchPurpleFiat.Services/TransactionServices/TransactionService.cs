@@ -22,8 +22,8 @@ namespace DutchPurpleFiat.Services.TransactionServices
             {
                 AccountId = transaction.AccountId,
                 Ammount = transaction.Amount,
-                TransactionUID = DataHelper.GenerateUniqueId(),
-                CusomerId = transaction.CustomerId,
+                TransactionUid = DataHelper.GenerateUniqueId(),
+                CustomerId = transaction.CustomerId,
                 TransactionsDate = transaction.TransactionDate
             });
         }
@@ -37,7 +37,7 @@ namespace DutchPurpleFiat.Services.TransactionServices
             {
                 AccountId = x.AccountId,
                 Amount = x.Ammount,
-                CustomerId = x.CusomerId,
+                CustomerId = x.CustomerId,
                 TransactionDate = x.TransactionsDate
             });
         }
