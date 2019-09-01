@@ -41,17 +41,10 @@ namespace DutchPurpleFiat.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]AccountModel newAccount)
         {
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
-
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404);
-
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500);
+            if(newAccount == null || string.IsNullOrWhiteSpace (newAccount.CustomerId ))
+            {
+                return new BadRequestResult();
+            }
             var accountId = string.Empty;
             try
             {

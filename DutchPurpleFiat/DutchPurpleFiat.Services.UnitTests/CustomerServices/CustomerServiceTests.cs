@@ -26,11 +26,7 @@ namespace DutchPurpleFiat.Services.UnitTests.CustomerServices
             this.mockTransactionService = this.mockRepository.Create<ITransactionService>();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            this.mockRepository.VerifyAll();
-        }
+    
 
         private CustomerService CreateService()
         {
@@ -110,6 +106,7 @@ namespace DutchPurpleFiat.Services.UnitTests.CustomerServices
             // Arrange
             var service = this.CreateService();
             string customerId = "existentCustomer";
+            mockCustomerRepository.Setup(x => x.CustomerExists(customerId)).Returns(true);
             mockCustomerRepository.Setup(x => x.GetCustomerByUId(customerId)).Returns(new Data.Entities.CustomerEntity() {FirstName ="bla", LastName = "crocobaur", CustomerUId = customerId });
             mockTransactionService.Setup(x => x.GetTransactionsForCustomerId(customerId)).Returns(new List<TransactionDto>());
             // Act
@@ -127,6 +124,7 @@ namespace DutchPurpleFiat.Services.UnitTests.CustomerServices
             // Arrange
             var service = this.CreateService();
             string customerId = "existentCustomer";
+            mockCustomerRepository.Setup(x => x.CustomerExists(customerId)).Returns(true);
             mockCustomerRepository.Setup(x => x.GetCustomerByUId(customerId)).Returns(new Data.Entities.CustomerEntity() { FirstName = "bla", LastName = "crocobaur", CustomerUId = customerId });
             mockTransactionService.Setup(x => x.GetTransactionsForCustomerId(customerId)).Returns(new List<TransactionDto>());
             // Act
@@ -144,6 +142,7 @@ namespace DutchPurpleFiat.Services.UnitTests.CustomerServices
             // Arrange
             var service = this.CreateService();
             string customerId = "existentCustomer";
+            mockCustomerRepository.Setup(x => x.CustomerExists(customerId)).Returns(true);
             mockCustomerRepository.Setup(x => x.GetCustomerByUId(customerId)).Returns(new Data.Entities.CustomerEntity() { FirstName = "bla", LastName = "crocobaur", CustomerUId = customerId });
             mockTransactionService.Setup(x => x.GetTransactionsForCustomerId(customerId)).Returns(new List<TransactionDto>() {
                 new TransactionDto()
@@ -175,6 +174,7 @@ namespace DutchPurpleFiat.Services.UnitTests.CustomerServices
             // Arrange
             var service = this.CreateService();
             string customerId = "existentCustomer";
+            mockCustomerRepository.Setup(x => x.CustomerExists(customerId)).Returns(true);
             mockCustomerRepository.Setup(x => x.GetCustomerByUId(customerId)).Returns(new Data.Entities.CustomerEntity() { FirstName = "bla", LastName = "crocobaur", CustomerUId = customerId });
             mockTransactionService.Setup(x => x.GetTransactionsForCustomerId(customerId)).Returns(new List<TransactionDto>() {
                 new TransactionDto()

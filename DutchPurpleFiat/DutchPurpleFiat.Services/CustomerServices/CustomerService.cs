@@ -32,7 +32,10 @@ namespace DutchPurpleFiat.Services.CustomerServices
             {
                 throw new ArgumentException(DataValidationConstants.invalidCustomerIdMessage);
             }
-
+            if (!CusomerExists(customerId))
+            {
+                throw new ArgumentNullException(DataValidationConstants.invalidCustomerIdMessage);
+            }
             var customerEntity = customerRepository.GetCustomerByUId(customerId);
             var customerTransactions = transactionServices.GetTransactionsForCustomerId(customerId);
             return new CustomerDto()

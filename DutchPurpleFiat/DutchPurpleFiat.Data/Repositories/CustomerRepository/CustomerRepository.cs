@@ -21,12 +21,6 @@ namespace DutchPurpleFiat.Data.Repositories.CustomerRepository
         }
         public CustomerEntity GetCustomerByUId(string customerId)
         {
-
-            if (!DataStore.CustomerStore.Any(x=>x.CustomerUId  == customerId))
-            {
-                throw new ArgumentNullException(DataValidationConstants.invalidCustomerIdMessage);
-            }
-
             return DataStore.CustomerStore.FirstOrDefault(x => x.CustomerUId == customerId);
         }
     }

@@ -1,0 +1,191 @@
+{
+	"variables": [],
+	"info": {
+		"name": "dutch-purple-fiat",
+		"_postman_id": "0f41a33b-8502-a83c-187a-83456b64d885",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:5001/api/Account",
+			"request": {
+				"url": "https://localhost:5001/api/Account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\",\n\t\"InitialCredit\": 0\n}"
+				},
+				"description": "add account with non 0 balance"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Account",
+			"request": {
+				"url": "https://localhost:5001/api/Account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\",\n\t\"InitialCredit\": 0\n}"
+				},
+				"description": "add account with  0 balance"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Account",
+			"request": {
+				"url": "https://localhost:5001/api/Account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\",\n\t\"InitialCredit\": 101\n}"
+				},
+				"description": "add account with non 0 balance"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Account",
+			"request": {
+				"url": "https://localhost:5001/api/Account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW000\",\n\t\"InitialCredit\": 101\n}"
+				},
+				"description": "add account for non existing customer"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Account",
+			"request": {
+				"url": "https://localhost:5001/api/Account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "add account with missing parameters"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Customer",
+			"request": {
+				"url": {
+					"raw": "https://localhost:5001/api/Customer?customerId=CUID1-JW",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Customer"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "CUID1-JW",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\"\n}"
+				},
+				"description": "get account details"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:5001/api/Customer",
+			"request": {
+				"url": {
+					"raw": "https://localhost:5001/api/Customer?customerId=CUID1-JW",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Customer"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "CUID1-JW",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"CustomerId\": \"CUID1-JW\"\n}"
+				},
+				"description": "get account details"
+			},
+			"response": []
+		}
+	]
+}
