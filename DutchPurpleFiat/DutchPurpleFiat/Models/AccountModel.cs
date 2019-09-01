@@ -20,6 +20,6 @@ namespace DutchPurpleFiat.Models
         /// </summary>
         /// <value>Initial credit on opening new account</value>
         [Required]
-        public decimal? InitialCredit { get; set; }
+        public float InitialCredit { get; set; }
     }
 }
